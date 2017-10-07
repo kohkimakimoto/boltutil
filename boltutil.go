@@ -17,7 +17,7 @@ func Get(tx *bolt.Tx, bucketNames []string, key interface{}, to interface{}) err
 		return ErrNotFound
 	}
 
-	keyB, err := ToBytes(key)
+	keyB, err := ToKeyBytes(key)
 	if err != nil {
 		return err
 	}
@@ -41,7 +41,7 @@ func Set(tx *bolt.Tx, bucketNames []string, key interface{}, value interface{}) 
 		return err
 	}
 
-	keyB, err := ToBytes(key)
+	keyB, err := ToKeyBytes(key)
 	if err != nil {
 		return err
 	}
@@ -65,7 +65,7 @@ func Delete(tx *bolt.Tx, bucketNames []string, key interface{}) error {
 		return err
 	}
 
-	keyB, err := ToBytes(key)
+	keyB, err := ToKeyBytes(key)
 	if err != nil {
 		return err
 	}
@@ -79,7 +79,7 @@ func DeleteBucket(tx *bolt.Tx, bucketNames []string, key interface{}) error {
 		return err
 	}
 
-	keyB, err := ToBytes(key)
+	keyB, err := ToKeyBytes(key)
 	if err != nil {
 		return err
 	}

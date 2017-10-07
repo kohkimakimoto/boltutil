@@ -6,7 +6,7 @@ import (
 	"encoding/gob"
 )
 
-func ToBytes(in interface{}) ([]byte, error) {
+func ToKeyBytes(in interface{}) ([]byte, error) {
 	switch v := in.(type) {
 	case []byte:
 		return v, nil

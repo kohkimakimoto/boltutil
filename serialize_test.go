@@ -3,10 +3,11 @@ package boltutil
 import (
 	"bytes"
 	"testing"
+	"time"
 )
 
-func TestToBytesFromString(t *testing.T) {
-	b, err := ToBytes("aa")
+func TestToKeyBytesFromString(t *testing.T) {
+	b, err := ToKeyBytes("aa")
 	if err != nil {
 		t.Error(err)
 	}
@@ -17,8 +18,8 @@ func TestToBytesFromString(t *testing.T) {
 	}
 }
 
-func TestToBytesFromInt(t *testing.T) {
-	b, err := ToBytes(1)
+func TestToKeyBytesFromInt(t *testing.T) {
+	b, err := ToKeyBytes(1)
 	if err != nil {
 		t.Error(err)
 	}
@@ -28,6 +29,25 @@ func TestToBytesFromInt(t *testing.T) {
 		t.Errorf("expected %v but result: %v", []byte{0, 0, 0, 0, 0, 0, 0, 1}, b)
 	}
 }
+
+func TestToKeyBytesFromTime(t *testing.T) {
+	tm1 := time.Date(1980, 1, 27, 10, 59, 59, 0, time.UTC)
+	tm2 := time.Date(1980, 1, 27, 10, 59, 59, 1, time.UTC)
+
+	b1, err := ToKeyBytes(tm1)
+	if err != nil {
+		t.Error(err)
+	}
+
+	b2, err := ToKeyBytes(tm2)
+	if err != nil {
+		t.Error(err)
+	}
+
+	t.Log(b1)
+	t.Log(b2)
+}
+
 
 type example struct {
 	Str string
