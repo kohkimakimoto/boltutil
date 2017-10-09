@@ -60,9 +60,9 @@ func Set(tx *bolt.Tx, bucketNames []string, key interface{}, value interface{}) 
 }
 
 func Delete(tx *bolt.Tx, bucketNames []string, key interface{}) error {
-	bucket, err := CreateBucketIfNotExists(tx, bucketNames)
-	if err != nil {
-		return err
+	bucket := Bucket(tx, bucketNames)
+	if bucket == nil {
+		return nil
 	}
 
 	keyB, err := ToKeyBytes(key)
@@ -74,9 +74,9 @@ func Delete(tx *bolt.Tx, bucketNames []string, key interface{}) error {
 }
 
 func DeleteBucket(tx *bolt.Tx, bucketNames []string, key interface{}) error {
-	bucket, err := CreateBucketIfNotExists(tx, bucketNames)
-	if err != nil {
-		return err
+	bucket := Bucket(tx, bucketNames)
+	if bucket == nil {
+		return nil
 	}
 
 	keyB, err := ToKeyBytes(key)
