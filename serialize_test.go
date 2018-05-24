@@ -48,7 +48,6 @@ func TestToKeyBytesFromTime(t *testing.T) {
 	t.Log(b2)
 }
 
-
 type example struct {
 	Str string
 	Num int
